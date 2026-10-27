@@ -1,4 +1,4 @@
-using System;
+using UnityEngine;
 
 namespace MidtermExam.Prob04
 {
@@ -17,8 +17,12 @@ namespace MidtermExam.Prob04
         /// </remarks>
         public int AS04_SequentialSearch(int[] values, int target)
         {
-            // TODO: เขียนคำตอบแทนคำสั่ง throw ด้านล่าง
-            throw new NotImplementedException();
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (values[i] == target) return i;
+            }
+
+            return -1;
         }
 
         /// <summary>ข้อ 04.2: ค้นหาตัวเลขด้วย Binary Search โดยลดช่วงค้นหาประมาณครึ่งหนึ่งต่อขั้น</summary>
@@ -37,14 +41,31 @@ namespace MidtermExam.Prob04
         /// </remarks>
         public int AS05_BinarySearch(int[] sortedValues, int target)
         {
-            // TODO: เขียนคำตอบแทนคำสั่ง throw ด้านล่าง
-            // 1. จัดการ input ที่เป็น null/ว่าง และกำหนดขอบเขต index ของช่วงค้นหา
-            // 2. เลือก index ตรงกลางของช่วง แล้วเปรียบเทียบค่าตรงกลางกับ target
-            // 3. ถ้ายังไม่ตรง ให้เลือกค้นหาต่อเฉพาะครึ่งซ้ายหรือครึ่งขวาตามลำดับค่าที่เรียงไว้
-            //    ต้องตัดตำแหน่งที่ตรวจแล้วออก เพื่อให้ช่วงเล็กลงและไม่เกิดการวนซ้ำไม่จบ
-            // 4. ถ้าช่วงค้นหาหมดและยังไม่พบ ให้คืนค่าที่โจทย์กำหนดสำหรับกรณีไม่พบ
-            // ลองตรวจกรณีสมาชิกเดียว สองสมาชิก เป้าหมายอยู่หัว/ท้าย และเป้าหมายอยู่นอกช่วงค่า
-            throw new NotImplementedException();
+            int left = 0;
+            int right = sortedValues.Length - 1;
+            int mid = right / 2 - 1;
+
+            Debug.Log($"Total: {sortedValues.Length} | Mid: {mid}");
+
+            while (left < right)
+            {
+                if (target > mid)
+                {
+                    left = mid;
+                    mid = right / 2 - 1;
+                }
+                else if (target < mid)
+                {
+                    right = mid;
+                    mid = right / 2 - 1;
+                }
+                else
+                {
+                    return mid;
+                }
+            }
+
+            return -1;
         }
     }
 }

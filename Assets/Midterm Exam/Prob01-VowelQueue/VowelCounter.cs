@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MidtermExam.Prob01
 {
@@ -22,8 +23,22 @@ namespace MidtermExam.Prob01
         /// </remarks>
         public int AS01_CountVowels(Queue<string> alphabets)
         {
-            // TODO: เขียนคำตอบแทนคำสั่ง throw exception ด้านล่าง
-            throw new NotImplementedException();
+            if (alphabets == null || alphabets.Count == 0) return 0;
+
+            var alphabetsQueue = new Queue<string>(alphabets);
+
+            string[] vowels = { "a", "e", "i", "o", "u" };
+            int count = 0;
+            while (alphabetsQueue.Count > 0)
+            {
+                string thisChar = alphabetsQueue.Dequeue();
+                if (thisChar != null && vowels.Contains(thisChar))
+                {
+                    count++;
+                }
+            }
+
+            return count;
         }
     }
 }
